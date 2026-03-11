@@ -407,7 +407,7 @@ function personFormHTML(p, i){
       </div>
 
       <div class="form-section">自費項目與備註</div>
-      <div class="fg span2"><label>自費升等費用<span class="hint">（超過補助額度，填差額金額；不符合補助條件自費參加，填全額）</span></label><input type="number" id="p${i}_upgrade" placeholder="例：正式員工補助3400元，自費升等選6000元方案者，則填自費升等差額【2600】" min="0" value="${p.fd.upgrade||''}"></div>
+      <div class="fg span2"><label>自費升等費用<span class="hint">（超過補助額度，填差額金額；不符合補助條件之員工及親友，填全額）</span></label><input type="number" id="p${i}_upgrade" placeholder="例：正式員工補助3400元，自費升等選6000元方案者，則填自費升等差額【2600】" min="0" value="${p.fd.upgrade||''}"></div>
       <div class="fg span2"><label>自費加選項目及費用<span class="hint">（填項目+金額 多筆用,分隔）</span></label><input type="text" id="p${i}_addon" placeholder="例：胰臟癌(CA-199)+400,胃鏡+1575" value="${p.fd.addon||''}"></div>
       <div class="fg span2"><label>備註<span class="hint">（親友預約單請備註員工姓名）</span></label>
         <textarea id="p${i}_note" placeholder="親友預約單請備註員工姓名">${p.fd.note||''}</textarea>
@@ -543,7 +543,7 @@ async function submitAll(){
     upgrade_fee: parseInt(p.fd.upgrade) || 0,
     addon_items: p.fd.addon || '',
     notes: p.fd.note || '',
-    emp_no: p.type==='emp' ? p.fd.empno : empFd.empno,
+    emp_no: "'" + (p.type==='emp' ? (typeof p.fd.empno === 'string' ? p.fd.empno : String(p.fd.empno)) : (typeof empFd.empno === 'string' ? empFd.empno : String(empFd.empno))),
     job_title: p.type==='emp' ? p.fd.jobtitle : '',
     company: p.type==='emp' ? p.fd.company : empFd.company,
     relation: p.type==='fam' ? p.fd.relation : '',

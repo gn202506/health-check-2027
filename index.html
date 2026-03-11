@@ -365,7 +365,7 @@ function personFormHTML(p, i){
         <div class="gender-display ${p.fd.gender==='M'?'male':p.fd.gender==='F'?'female':''}" id="p${i}_gender_disp">${genderDisplay(p.fd.idno||'')}</div>
         <input type="hidden" id="p${i}_gender" value="${p.fd.gender||''}">
       </div>
-      <div class="fg"><label>連絡電話 <span class="req">*</span><span class="hint">（簡訊通知健檢時間）</span></label><input type="tel" id="p${i}_phone" placeholder="0912-345-678" value="${p.fd.phone||''}"></div>
+      <div class="fg"><label>連絡電話 <span class="req">*</span><span class="hint">（簡訊通知健檢時間）</span></label><input type="tel" id="p${i}_phone" placeholder="0912345678" value="${p.fd.phone||''}"></div>
       <div class="fg"><label>個人地址 <span class="req">*</span><span class="hint">（病歷建檔）</span></label><input type="text" id="p${i}_addr" placeholder="請輸入完整地址" value="${p.fd.addr||''}"></div>
 
       ${isEmp ? `

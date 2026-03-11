@@ -164,7 +164,7 @@ textarea{resize:vertical;min-height:72px;}
       <div class="logo-sub">Employee Health Check System</div>
     </div>
   </div>
-  <div class="header-year">2027 年度健檢報名</div>
+  <div class="header-year">2027年度健檢預約單</div>
 </header>
 
 <main>
@@ -177,19 +177,24 @@ textarea{resize:vertical;min-height:72px;}
   <!-- PAGE 1：填寫資料 -->
   <div id="page1" class="card">
     <div class="card-header">
-      <h2>📝 填寫健檢報名資料</h2>
-      <p>請填寫員工本人及同行眷屬的完整資料，填完後點下一步確認送出</p>
+      <h2>📝 健檢預約單</h2>
+      <p>請填寫員工本人及自費親友的完整資料，填完後點下一步確認送出</p>
     </div>
     <div class="card-body">
       <div class="notice">
         📍 健檢地點：高雄市立聯合醫院（高雄市鼓山區中華一路976號B1）<br>
-        📅 健檢日期請依照 IT 預約系統確認後的日期填寫
-      </div>
+        <div style="margin-top:8px;">
+          凡到職滿一年之正式員工（117/10/1 前到職 且 117/10/31仍在職），享有以下補助：<br>
+          • 正式員工：補助 3400 元<br>
+          • 副理級以上：補助 6000 元<br>
+          ※ 不符合條件者可自費參加，檢查期間須請假。
+        </div>
+        </div>
 
       <!-- 眷屬新增按鈕 -->
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-        <div style="font-size:13px;color:var(--slate-m);">員工本人＋同行眷屬請分頁填寫</div>
-        <button class="btn-add-family" onclick="addFamily()">＋ 新增眷屬</button>
+        <div style="font-size:13px;color:var(--slate-m);">員工本人及自費親友必須一起預約，分頁填寫</div>
+        <button class="btn-add-family" onclick="addFamily()">＋ 新增親友</button>
       </div>
 
       <!-- 分頁 tabs -->
@@ -211,10 +216,9 @@ textarea{resize:vertical;min-height:72px;}
     </div>
     <div class="card-body">
       <table class="sum-table">
-        <thead><tr><th>身份</th><th>姓名</th><th>健檢日期</th><th>方案</th><th>費用小計</th></tr></thead>
+        <thead><tr><th>身份</th><th>姓名</th><th>健檢日期</th><th>方案</th><th>自費升等</th><th>加選項目</th></tr></thead>
         <tbody id="sumBody"></tbody>
       </table>
-      <div id="totalRow" style="text-align:right;font-size:15px;font-weight:700;color:var(--teal);margin-bottom:18px;padding-right:4px;"></div>
       <div style="font-size:12px;color:var(--slate-m);background:var(--slate-l);border-radius:8px;padding:12px 14px;line-height:1.7;">
         <div style="margin-bottom:8px;">
           凡到職滿一年之正式員工（117/10/1 前到職 且 117/10/31仍在職），享有以下補助：<br>
@@ -256,35 +260,14 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbygMYmPll-_hPiSUwnbfqyG
 // ══════════════════════════════════════
 // ★ 健檢日期（請依實際場次修改）
 // ══════════════════════════════════════
-const DATE_OPTIONS = [
-  '2027/05/03（一）',
-  '2027/05/04（二）',
-  '2027/05/05（三）',
-  '2027/05/06（四）',
-  '2027/05/07（五）',
-  '2027/05/10（一）',
-  '2027/05/11（二）',
-  '2027/05/12（三）',
-  '2027/05/13（四）',
-  '2027/05/14（五）',
-  '2027/05/17（一）',
-  '2027/05/18（二）',
-  '2027/05/19（三）',
-  '2027/05/20（四）',
-  '2027/05/21（五）',
-  '2027/05/24（一）',
-  '2027/05/25（二）',
-  '2027/05/26（三）',
-  '2027/05/27（四）',
-  '2027/05/28（五）',
-  '2027/05/31（一）',
-  '2027/06/01（二）',
-];
+
 
 const PLANS = [
   {id:'A', name:'A 方案', price:3400, desc:'基礎健康檢查（含血液、尿液、腹部超音波、胸部X光等）'},
   {id:'B', name:'B 方案', price:6000, desc:'全套精密健康檢查（含A方案全項目＋腫瘤指標、心電圖、骨密度等）'},
 ];
+
+const JOB_TITLES = ['助理','管理師','工程師','組長','專案副理','專案經理','副理','經理','副總經理','總經理','董事長'];
 
 let persons = [];
 let familyCount = 0;
@@ -307,12 +290,14 @@ function init(){
   renderTabs();
 }
 
-// ── 新增眷屬 ──
+// ── 新增親友 ──
 function addFamily(){
+  saveTab(activeTab);
   familyCount++;
-  persons.push({type:'fam', label:`眷屬 ${familyCount}`, fd:{}});
-  activeTab = persons.length - 1;
+  persons.push({type:'fam', label:`自費親友 ${familyCount}`, fd:{}});
+  activeTab = 0;
   renderTabs();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 // ── 移除眷屬 ──
@@ -321,7 +306,7 @@ function removeFamily(idx){
   if(activeTab >= persons.length) activeTab = persons.length - 1;
   // 重新計算眷屬編號
   let fc = 0;
-  persons.forEach(p => { if(p.type==='fam'){ fc++; p.label=`眷屬 ${fc}`; } });
+  persons.forEach(p => { if(p.type==='fam'){ fc++; p.label=`自費親友 ${fc}`; } });
   familyCount = fc;
   renderTabs();
 }
@@ -361,22 +346,17 @@ function selectPlan(i, planId){
 // ── 表單 HTML ──
 function personFormHTML(p, i){
   const isEmp = p.type === 'emp';
-  const dateOpts = DATE_OPTIONS.map(d =>
-    `<option value="${d}" ${p.fd.date===d?'selected':''}>${d}</option>`
-  ).join('');
+  
 
   return `
     <div class="type-badge ${isEmp?'badge-emp':'badge-fam'}">
-      ${isEmp ? '👤 員工本人' : '👨‍👩‍👧 眷屬自費'}
+      ${isEmp ? '👤 員工本人' : '👨‍👩‍👧 親友自費'}
     </div>
     <div class="form-grid">
       <div class="form-section">基本資料</div>
       <div class="fg span2">
-        <label>健檢日期 <span class="req">*</span></label>
-        <select id="p${i}_date">
-          <option value="">— 請選擇健檢日期 —</option>
-          ${dateOpts}
-        </select>
+          <label>健檢日期 <span class="req">*</span><span class="hint"><span style="color:#d94f4f;font-weight:bold;font-size:18px;">📅須與線上預約日期一致！若不一致，將被重新分配到未額滿的日期📅</span></span></label>
+        <input type="date" id="p${i}_date" value="${p.fd.date||''}">
       </div>
       <div class="fg"><label>姓名 <span class="req">*</span></label><input type="text" id="p${i}_name" placeholder="請輸入真實中文姓名" value="${p.fd.name||''}"></div>
       <div class="fg"><label>出生年月日 <span class="req">*</span><span class="hint">（西元年/月/日）</span></label><input type="date" id="p${i}_birth" value="${p.fd.birth||''}"></div>
@@ -391,7 +371,12 @@ function personFormHTML(p, i){
       ${isEmp ? `
       <div class="form-section">員工職務資料</div>
       <div class="fg"><label>職編 <span class="req">*</span><span class="hint">（3-4碼 例：005、1005）</span></label><input type="text" id="p${i}_empno" placeholder="例：005 或 1005" maxlength="4" value="${p.fd.empno||''}"></div>
-      <div class="fg"><label>職稱 <span class="req">*</span></label><input type="text" id="p${i}_jobtitle" placeholder="例：資深工程師" value="${p.fd.jobtitle||''}"></div>
+      <div class="fg"><label>職稱 <span class="req">*</span></label>
+        <select id="p${i}_jobtitle">
+          <option value="">— 請選擇 —</option>
+          ${JOB_TITLES.map(t=>`<option ${p.fd.jobtitle===t?'selected':''}>${t}</option>`).join('')}
+        </select>
+      </div>
       <div class="fg span2"><label>公司別 <span class="req">*</span></label>
         <select id="p${i}_company">
           <option value="">— 請選擇 —</option>
@@ -422,10 +407,10 @@ function personFormHTML(p, i){
       </div>
 
       <div class="form-section">自費項目與備註</div>
-      <div class="fg"><label>自費升等費用<span class="hint">（填金額）</span></label><input type="number" id="p${i}_upgrade" placeholder="例：500" min="0" value="${p.fd.upgrade||''}"></div>
-      <div class="fg"><label>加選項目</label><input type="text" id="p${i}_addon" placeholder="例：子宮頸抹片" value="${p.fd.addon||''}"></div>
-      <div class="fg span2"><label>備註<span class="hint">（替眷屬預約請在本欄備註）</span></label>
-        <textarea id="p${i}_note" placeholder="替眷屬預約請在本欄備註員工姓名/關係">${p.fd.note||''}</textarea>
+      <div class="fg span2"><label>自費升等費用<span class="hint">（超過補助額度，填差額金額；不符合補助條件自費參加，填全額）</span></label><input type="number" id="p${i}_upgrade" placeholder="例：正式員工補助3400元，自費升等選6000元方案者，則填自費升等差額【2600】" min="0" value="${p.fd.upgrade||''}"></div>
+      <div class="fg span2"><label>自費加選項目及費用<span class="hint">（填項目+金額 多筆用,分隔）</span></label><input type="text" id="p${i}_addon" placeholder="例：胰臟癌(CA-199)+400,胃鏡+1575" value="${p.fd.addon||''}"></div>
+      <div class="fg span2"><label>備註<span class="hint">（親友預約單請備註員工姓名）</span></label>
+        <textarea id="p${i}_note" placeholder="親友預約單請備註員工姓名">${p.fd.note||''}</textarea>
       </div>
     </div>
     ${i < persons.length - 1 ? `
@@ -510,22 +495,19 @@ function goToStep2(){
 
   // 建立確認表格
   const tbody = document.getElementById('sumBody'); tbody.innerHTML = '';
-  let total = 0;
   persons.forEach(p => {
-    const pl = PLANS.find(x => x.id===p.fd.plan) || {name:'—', price:0};
+    const pl = PLANS.find(x => x.id===p.fd.plan) || {name:'—'};
     const upgrade = parseInt(p.fd.upgrade) || 0;
-    const sub = pl.price + upgrade;
-    total += sub;
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><span class="${p.type==='emp'?'tag-e':'tag-f'}">${p.type==='emp'?'員工':'眷屬'}</span></td>
+      <td><span class="${p.type==='emp'?'tag-e':'tag-f'}">${p.type==='emp'?'員工':'親友自費'}</span></td>
       <td><strong>${p.fd.name||'—'}</strong>${p.type==='emp'?`<br><span style="font-size:11px;color:var(--slate-m)">${p.fd.company||''} ${p.fd.jobtitle||''}</span>`:''}</td>
       <td>${p.fd.date||'—'}</td>
-      <td>${pl.name}${p.fd.addon?`<br><span style="font-size:11px;color:var(--slate-m)">加選：${p.fd.addon}</span>`:''}</td>
-      <td style="font-weight:700;color:var(--teal)">NT$ ${sub.toLocaleString()}</td>`;
+      <td>${pl.name}<br><span style="font-size:12px;color:var(--teal);font-weight:700;">NT$ ${pl.price.toLocaleString()}</span></td>
+      <td>${upgrade > 0 ? 'NT$ '+upgrade.toLocaleString() : '—'}</td>
+      <td>${p.fd.addon||'—'}</td>`;
     tbody.appendChild(tr);
   });
-  document.getElementById('totalRow').textContent = `總費用：NT$ ${total.toLocaleString()}`;
   document.getElementById('page1').style.display = 'none';
   document.getElementById('page2').style.display = 'block';
   setStep(2);
@@ -588,7 +570,7 @@ async function submitAll(){
   persons.forEach(p => {
     const pl = PLANS.find(x => x.id===p.fd.plan) || {name:'—'};
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td><span class="${p.type==='emp'?'tag-e':'tag-f'}">${p.type==='emp'?'員工':'眷屬'}</span></td><td>${p.fd.name||'—'}</td><td>${p.fd.date||'—'}</td><td>${pl.name}</td>`;
+    tr.innerHTML = `<td><span class="${p.type==='emp'?'tag-e':'tag-f'}">${p.type==='emp'?'員工':'親友自費'}</span></td><td>${p.fd.name||'—'}</td><td>${p.fd.date||'—'}</td><td>${pl.name}</td>`;
     tb.appendChild(tr);
   });
   ft.appendChild(tb);

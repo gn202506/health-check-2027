@@ -16,13 +16,18 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Noto Sans TC',sans-serif;background:#edf2f7;min-height:100vh;color:var(--slate);}
+
+/* Header */
 header{background:var(--slate);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.18);}
 .logo{display:flex;align-items:center;gap:12px;color:white;}
 .logo-icon{width:36px;height:36px;background:var(--teal-m);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;}
 .logo-text{font-size:16px;font-weight:500;letter-spacing:1px;}
 .logo-sub{font-size:11px;color:#8fa0b3;letter-spacing:2px;margin-top:2px;}
 .header-year{color:#8fa0b3;font-size:13px;}
+
 main{max-width:900px;margin:0 auto;padding:36px 20px 80px;}
+
+/* Steps */
 .steps{display:flex;align-items:center;margin-bottom:32px;}
 .step{display:flex;align-items:center;gap:8px;flex:1;}
 .step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:var(--border);color:var(--slate-m);transition:all .3s;flex-shrink:0;}
@@ -32,13 +37,19 @@ main{max-width:900px;margin:0 auto;padding:36px 20px 80px;}
 .step.active .step-label{color:var(--teal);font-weight:700;}
 .step-line{flex:1;height:2px;background:var(--border);margin:0 6px;transition:background .3s;}
 .step-line.done{background:var(--success);}
+
+/* Card */
 .card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;animation:fadeUp .4s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .card-header{background:linear-gradient(120deg,var(--teal) 0%,#0a6259 100%);padding:24px 36px;color:white;}
 .card-header h2{font-size:19px;font-weight:700;}
 .card-header p{font-size:13px;opacity:.8;margin-top:5px;}
 .card-body{padding:32px 36px;}
+
+/* Notice */
 .notice{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:0 8px 8px 0;padding:11px 14px;font-size:12px;color:var(--slate-m);margin-bottom:22px;line-height:1.7;}
+
+/* Person tabs */
 .ptabs{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
 .ptab{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:2px solid var(--border);background:var(--slate-l);color:var(--slate-m);transition:all .2s;white-space:nowrap;}
 .ptab:hover{border-color:var(--teal-m);color:var(--teal);}
@@ -48,9 +59,13 @@ main{max-width:900px;margin:0 auto;padding:36px 20px 80px;}
 .ptab.done::after{content:' ✓';}
 .ppanel{display:none;}
 .ppanel.active{display:block;animation:fadeUp .3s ease;}
+
+/* Type badge */
 .type-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:18px;}
 .badge-emp{background:var(--teal-l);color:var(--teal);border:1.5px solid var(--teal-m);}
 .badge-fam{background:var(--purple-l);color:var(--purple);border:1.5px solid var(--purple-m);}
+
+/* Form */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .fg{display:flex;flex-direction:column;gap:5px;}
 .fg.span2{grid-column:1/-1;}
@@ -61,6 +76,8 @@ input,select,textarea{border:1.5px solid var(--border);border-radius:8px;padding
 input:focus,select:focus,textarea:focus{border-color:var(--teal-m);box-shadow:0 0 0 3px rgba(26,171,155,.12);}
 textarea{resize:vertical;min-height:72px;}
 .form-section{grid-column:1/-1;font-size:11px;font-weight:700;color:var(--slate-m);letter-spacing:1.5px;padding-bottom:7px;border-bottom:1px dashed var(--border);margin-top:6px;}
+
+/* Plan cards */
 .plan-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;grid-column:1/-1;}
 .plan-card{border:2px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .2s;position:relative;}
 .plan-card:hover{border-color:var(--teal-m);}
@@ -71,9 +88,13 @@ textarea{resize:vertical;min-height:72px;}
 .plan-desc{font-size:11px;color:var(--slate-m);margin-top:4px;line-height:1.5;}
 .plan-check{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;border:2px solid var(--border);background:white;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s;}
 .plan-card.selected .plan-check{background:var(--teal);border-color:var(--teal);color:white;}
+
+/* Gender display */
 .gender-display{border:1.5px solid var(--border);border-radius:8px;padding:10px 13px;font-size:14px;font-weight:700;background:#f8fafc;color:var(--slate-m);min-height:43px;display:flex;align-items:center;gap:6px;}
 .gender-display.male{color:#2563eb;background:#eff6ff;border-color:#93c5fd;}
 .gender-display.female{color:#db2777;background:#fdf2f8;border-color:#f9a8d4;}
+
+/* Family */
 .family-section{background:var(--purple-l);border:1.5px solid var(--purple-m);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
 .family-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
 .family-title{font-size:13px;font-weight:700;color:var(--purple);}
@@ -81,12 +102,16 @@ textarea{resize:vertical;min-height:72px;}
 .btn-remove:hover{background:var(--danger);color:white;}
 .btn-add-family{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:2px dashed var(--teal-m);background:var(--teal-l);color:var(--teal);transition:all .2s;margin-top:10px;}
 .btn-add-family:hover{background:var(--teal);color:white;border-style:solid;}
+
+/* Summary table */
 .sum-table{width:100%;border-collapse:collapse;margin-bottom:18px;font-size:13px;}
 .sum-table th{background:var(--slate-l);font-size:11px;font-weight:700;color:var(--slate-m);letter-spacing:.8px;padding:10px 12px;text-align:left;border-bottom:2px solid var(--border);}
 .sum-table td{padding:11px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
 .sum-table tr:last-child td{border-bottom:none;}
 .tag-e{display:inline-block;background:var(--teal-l);color:var(--teal);font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;border:1px solid var(--teal-m);}
 .tag-f{display:inline-block;background:var(--purple-l);color:var(--purple);font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;border:1px solid var(--purple-m);}
+
+/* Buttons */
 .btn-row{display:flex;gap:10px;margin-top:24px;justify-content:flex-end;}
 .btn{padding:11px 26px;border-radius:8px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .2s;}
 .btn-primary{background:var(--teal);color:white;}
@@ -94,20 +119,26 @@ textarea{resize:vertical;min-height:72px;}
 .btn-primary:disabled{background:var(--border);color:var(--slate-m);cursor:not-allowed;transform:none;box-shadow:none;}
 .btn-secondary{background:var(--slate-l);color:var(--slate);border:1.5px solid var(--border);}
 .btn-secondary:hover{background:var(--border);}
-.btn-query{background:white;color:var(--teal);border:2px solid var(--teal);padding:11px 26px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .2s;}
-.btn-query:hover{background:var(--teal-l);}
+
+/* Next person row */
 .next-person-row{display:flex;justify-content:flex-end;margin-top:18px;}
+
+/* Success page */
 .success-page{text-align:center;padding:48px 36px;}
 .success-icon-wrap{width:76px;height:76px;background:linear-gradient(135deg,var(--success),#1dce87);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 22px;animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
 @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 .success-page h2{font-size:23px;margin-bottom:8px;}
 .success-page>p{color:var(--slate-m);font-size:13px;line-height:1.7;margin-bottom:20px;}
 .booking-id{display:inline-block;background:var(--teal);color:white;font-size:18px;font-weight:700;letter-spacing:3px;padding:7px 20px;border-radius:8px;margin-bottom:18px;}
+
+/* Loading */
 .loading-overlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,.85);z-index:400;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
 .loading-overlay.visible{display:flex;}
 .spinner{width:48px;height:48px;border:4px solid var(--teal-l);border-top:4px solid var(--teal);border-radius:50%;animation:spin 1s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-text{font-size:14px;color:var(--slate-m);font-weight:500;}
+
+/* Responsive */
 @media(max-width:620px){
   .form-grid{grid-template-columns:1fr;}
   .plan-row{grid-template-columns:1fr;}
@@ -118,6 +149,8 @@ textarea{resize:vertical;min-height:72px;}
 </style>
 </head>
 <body>
+
+<!-- Loading -->
 <div class="loading-overlay" id="loadingOverlay">
   <div class="spinner"></div>
   <div class="loading-text" id="loadingText">送出中，請稍候...</div>
@@ -141,7 +174,7 @@ textarea{resize:vertical;min-height:72px;}
     <div class="step" id="s2"><div class="step-num" id="sn2">2</div><div class="step-label">確認送出</div></div>
   </div>
 
-  <!-- PAGE 1 -->
+  <!-- PAGE 1：填寫資料 -->
   <div id="page1" class="card">
     <div class="card-header">
       <h2>📝 健檢預約單</h2>
@@ -156,20 +189,26 @@ textarea{resize:vertical;min-height:72px;}
           • 副理級以上：補助 6000 元<br>
           ※ 不符合條件者可自費參加，檢查期間須請假。
         </div>
-      </div>
+        </div>
+
+      <!-- 眷屬新增按鈕 -->
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
         <div style="font-size:13px;color:var(--slate-m);">員工本人及自費親友必須一起預約，分頁填寫</div>
         <button class="btn-add-family" onclick="addFamily()">＋ 新增親友</button>
       </div>
+
+      <!-- 分頁 tabs -->
       <div class="ptabs" id="ptabs"></div>
+      <!-- 分頁內容 -->
       <div id="ppanels"></div>
+
       <div class="btn-row">
         <button class="btn btn-primary" onclick="goToStep2()">下一步：確認送出 →</button>
       </div>
     </div>
   </div>
 
-  <!-- PAGE 2 -->
+  <!-- PAGE 2：確認頁 -->
   <div id="page2" class="card" style="display:none">
     <div class="card-header">
       <h2>✅ 確認報名內容</h2>
@@ -196,7 +235,7 @@ textarea{resize:vertical;min-height:72px;}
     </div>
   </div>
 
-  <!-- PAGE 3 -->
+  <!-- PAGE 3：完成頁 -->
   <div id="page3" class="card" style="display:none">
     <div class="success-page">
       <div class="success-icon-wrap">✓</div>
@@ -208,37 +247,54 @@ textarea{resize:vertical;min-height:72px;}
         ✅ 資料已成功送出，人資部門將收到您的報名記錄。如需修改請聯繫人資部門。
       </div>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap;">
-        <button class="btn-query" id="queryBtn" onclick="goToQuery()">🔍 查詢報名資料</button>
         <button class="btn btn-secondary" onclick="resetAll()">重新報名</button>
+        <button class="btn btn-primary" id="queryBtn" onclick="goToQuery()">🔍 查詢報名資料</button>
       </div>
     </div>
   </div>
 </main>
 
 <script>
+// ══════════════════════════════════════
+let lastBookingId = '';
+// ★ Google Apps Script 網址
+// ══════════════════════════════════════
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbygMYmPll-_hPiSUwnbfqyGe_Zu7NN-dfdZkIRqeZF2Pr5VOty0LHqWzsb9LmoFS96s/exec';
+
+// ══════════════════════════════════════
+// ★ 健檢日期（請依實際場次修改）
+// ══════════════════════════════════════
+
 
 const PLANS = [
   {id:'A', name:'A 方案', price:3400, desc:'基礎健康檢查（含血液、尿液、腹部超音波、胸部X光等）'},
   {id:'B', name:'B 方案', price:6000, desc:'全套精密健康檢查（含A方案全項目＋腫瘤指標、心電圖、骨密度等）'},
 ];
+
 const JOB_TITLES = ['助理','管理師','工程師','組長','專案副理','專案經理','副理','經理','副總經理','總經理','董事長'];
 
-let persons = [], familyCount = 0, activeTab = 0;
-let lastBookingId = '';
+let persons = [];
+let familyCount = 0;
+let activeTab = 0;
 
+// ── Loading ──
 function showLoading(text='送出中，請稍候...'){
   document.getElementById('loadingText').textContent = text;
   document.getElementById('loadingOverlay').className = 'loading-overlay visible';
 }
-function hideLoading(){ document.getElementById('loadingOverlay').className = 'loading-overlay'; }
+function hideLoading(){
+  document.getElementById('loadingOverlay').className = 'loading-overlay';
+}
 
+// ── 初始化 ──
 function init(){
   persons = [{type:'emp', label:'員工本人', fd:{}}];
-  familyCount = 0; activeTab = 0;
+  familyCount = 0;
+  activeTab = 0;
   renderTabs();
 }
 
+// ── 新增親友 ──
 function addFamily(){
   saveTab(activeTab);
   familyCount++;
@@ -248,15 +304,18 @@ function addFamily(){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
+// ── 移除眷屬 ──
 function removeFamily(idx){
   persons.splice(idx, 1);
   if(activeTab >= persons.length) activeTab = persons.length - 1;
+  // 重新計算眷屬編號
   let fc = 0;
   persons.forEach(p => { if(p.type==='fam'){ fc++; p.label=`自費親友 ${fc}`; } });
   familyCount = fc;
   renderTabs();
 }
 
+// ── 工具 ──
 function detectGender(id){
   if(!id || id.length < 2) return '';
   if(id[1]==='1') return 'M';
@@ -288,8 +347,11 @@ function selectPlan(i, planId){
   if(persons[i]) persons[i].fd.plan = planId;
 }
 
+// ── 表單 HTML ──
 function personFormHTML(p, i){
   const isEmp = p.type === 'emp';
+  
+
   return `
     <div class="type-badge ${isEmp?'badge-emp':'badge-fam'}">
       ${isEmp ? '👤 員工本人' : '👨‍👩‍👧 親友自費'}
@@ -297,7 +359,7 @@ function personFormHTML(p, i){
     <div class="form-grid">
       <div class="form-section">基本資料</div>
       <div class="fg span2">
-        <label>健檢日期 <span class="req">*</span><span class="hint"><span style="color:#d94f4f;font-weight:bold;font-size:18px;">📅須與線上預約日期一致！若不一致，將被重新分配到未額滿的日期📅</span></span></label>
+          <label>健檢日期 <span class="req">*</span><span class="hint"><span style="color:#d94f4f;font-weight:bold;font-size:18px;">📅須與線上預約日期一致！若不一致，將被重新分配到未額滿的日期📅</span></span></label>
         <input type="date" id="p${i}_date" value="${p.fd.date||''}">
       </div>
       <div class="fg"><label>姓名 <span class="req">*</span></label><input type="text" id="p${i}_name" placeholder="請輸入真實中文姓名" value="${p.fd.name||''}"></div>
@@ -309,6 +371,7 @@ function personFormHTML(p, i){
       </div>
       <div class="fg"><label>連絡電話 <span class="req">*</span><span class="hint">（簡訊通知健檢時間）</span></label><input type="tel" id="p${i}_phone" placeholder="0912345678" value="${p.fd.phone||''}"></div>
       <div class="fg"><label>個人地址 <span class="req">*</span><span class="hint">（病歷建檔）</span></label><input type="text" id="p${i}_addr" placeholder="請輸入完整地址" value="${p.fd.addr||''}"></div>
+
       ${isEmp ? `
       <div class="form-section">員工職務資料</div>
       <div class="fg"><label>職編 <span class="req">*</span><span class="hint">（3-4碼 例：005、1005）</span></label><input type="text" id="p${i}_empno" placeholder="例：005 或 1005" maxlength="4" value="${p.fd.empno||''}"></div>
@@ -334,6 +397,7 @@ function personFormHTML(p, i){
         </select>
       </div>
       `}
+
       <div class="form-section">健檢方案選擇</div>
       <div class="plan-row">
         ${PLANS.map(pl=>`
@@ -345,11 +409,10 @@ function personFormHTML(p, i){
             <div class="plan-desc">${pl.desc}</div>
           </div>`).join('')}
       </div>
+
       <div class="form-section">自費項目與備註</div>
-      <div class="fg span2"><label>自費升等費用<span class="hint">（超過補助額度，填差額金額；不符合補助條件之員工及親友，填全額）</span></label>
-        <input type="number" id="p${i}_upgrade" placeholder="例：正式員工補助3400元，自費升等選6000元方案者，則填自費升等差額【2600】" min="0" value="${p.fd.upgrade||''}"></div>
-      <div class="fg span2"><label>自費加選項目及費用<span class="hint">（填項目+金額 多筆用,分隔）</span></label>
-        <input type="text" id="p${i}_addon" placeholder="例：胰臟癌(CA-199)+400,胃鏡+1575" value="${p.fd.addon||''}"></div>
+      <div class="fg span2"><label>自費升等費用<span class="hint">（超過補助額度，填差額金額；不符合補助條件之員工及親友，填全額）</span></label><input type="number" id="p${i}_upgrade" placeholder="例：正式員工補助3400元，自費升等選6000元方案者，則填自費升等差額【2600】" min="0" value="${p.fd.upgrade||''}"></div>
+      <div class="fg span2"><label>自費加選項目及費用<span class="hint">（填項目+金額 多筆用,分隔）</span></label><input type="text" id="p${i}_addon" placeholder="例：胰臟癌(CA-199)+400,胃鏡+1575" value="${p.fd.addon||''}"></div>
       <div class="fg span2"><label>備註<span class="hint">（親友預約單請備註員工姓名）</span></label>
         <textarea id="p${i}_note" placeholder="親友預約單請備註員工姓名">${p.fd.note||''}</textarea>
       </div>
@@ -360,11 +423,12 @@ function personFormHTML(p, i){
       </div>` : ''}
     ${p.type==='fam' ? `
       <div style="margin-top:14px;text-align:right;">
-        <button class="btn-remove" onclick="removeFamily(${i})">✕ 移除此親友</button>
+        <button class="btn-remove" onclick="removeFamily(${i})">✕ 移除此眷屬</button>
       </div>` : ''}
   `;
 }
 
+// ── Tab 渲染 ──
 function renderTabs(){
   const tabs = document.getElementById('ptabs');
   const panels = document.getElementById('ppanels');
@@ -375,6 +439,7 @@ function renderTabs(){
     tab.textContent = (p.type==='emp' ? '👤 ' : '👨‍👩‍👧 ') + p.label;
     tab.onclick = () => { saveTab(i); activeTab = i; renderTabs(); };
     tabs.appendChild(tab);
+
     const panel = document.createElement('div');
     panel.className = 'ppanel' + (i===activeTab ? ' active' : '');
     panel.innerHTML = personFormHTML(p, i);
@@ -408,6 +473,7 @@ function saveTab(i){
 }
 function saveAllTabs(){ persons.forEach((_, i) => saveTab(i)); }
 
+// ── 步驟指示器 ──
 function setStep(n){
   [1,2].forEach(i => {
     const el = document.getElementById('s'+i); if(!el) return;
@@ -417,8 +483,10 @@ function setStep(n){
   document.getElementById('l1').className = 'step-line' + (n > 1 ? ' done' : '');
 }
 
+// ── 頁面切換 ──
 function goToStep2(){
   saveAllTabs();
+  // 驗證
   for(let i = 0; i < persons.length; i++){
     const p = persons[i];
     if(!p.fd.date){ alert(`請為「${p.label}」選擇健檢日期`); activeTab=i; renderTabs(); return; }
@@ -428,6 +496,8 @@ function goToStep2(){
     if(p.type==='emp' && !p.fd.empno){ alert('請填寫職編'); activeTab=i; renderTabs(); return; }
     if(p.type==='emp' && !p.fd.company){ alert('請選擇公司別'); activeTab=i; renderTabs(); return; }
   }
+
+  // 建立確認表格
   const tbody = document.getElementById('sumBody'); tbody.innerHTML = '';
   persons.forEach(p => {
     const pl = PLANS.find(x => x.id===p.fd.plan) || {name:'—'};
@@ -455,12 +525,14 @@ function goBackToForm(){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
+// ── 送出 ──
 async function submitAll(){
   showLoading('送出報名資料中...');
   const bid = 'HC' + Date.now().toString().slice(-8);
   lastBookingId = bid;
   const empFd = persons[0].fd;
   const now = new Date().toLocaleString('zh-TW');
+
   const rows = persons.map(p => ({
     booking_ref: bid,
     created_at: now,
@@ -476,19 +548,26 @@ async function submitAll(){
     upgrade_fee: parseInt(p.fd.upgrade) || 0,
     addon_items: p.fd.addon || '',
     notes: p.fd.note || '',
-    emp_no: "'" + (p.type==='emp' ? p.fd.empno : empFd.empno),
+    emp_no: "'" + (p.type==='emp' ? (typeof p.fd.empno === 'string' ? p.fd.empno : String(p.fd.empno)) : (typeof empFd.empno === 'string' ? empFd.empno : String(empFd.empno))),
     job_title: p.type==='emp' ? p.fd.jobtitle : '',
     company: p.type==='emp' ? p.fd.company : empFd.company,
     relation: p.type==='fam' ? p.fd.relation : '',
   }));
+
   try {
     await fetch(GAS_URL, {
-      method: 'POST', mode: 'no-cors',
+      method: 'POST',
+      mode: 'no-cors',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({rows})
     });
-  } catch(e){ console.error(e); }
+  } catch(e){
+    console.error(e);
+  }
+
   hideLoading();
+
+  // 顯示完成頁
   document.getElementById('bookingId').textContent = bid;
   const ft = document.getElementById('finalTable');
   ft.innerHTML = `<thead><tr><th>身份</th><th>姓名</th><th>健檢日期</th><th>方案</th></tr></thead>`;
@@ -500,15 +579,19 @@ async function submitAll(){
     tb.appendChild(tr);
   });
   ft.appendChild(tb);
+
   document.getElementById('page2').style.display = 'none';
   document.getElementById('page3').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
+// ── 重置 ──
+// ── 查詢跳轉 ──
 function goToQuery(){
-  window.location.href = `query.html?ref=${lastBookingId}`;
+  window.location.href = 'query.html?ref=' + lastBookingId;
 }
 
+// ── 重置 ──
 function resetAll(){
   ['page2','page3'].forEach(id => document.getElementById(id).style.display = 'none');
   document.getElementById('page1').style.display = 'block';
@@ -517,6 +600,7 @@ function resetAll(){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
+// ── 啟動 ──
 init();
 </script>
 </body>

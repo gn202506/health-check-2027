@@ -195,7 +195,7 @@ function renderResult(bid, rows){
       <div class="person-card-body">
         <div class="info-grid">
           <div class="info-item"><div class="info-label">姓名</div><div class="info-value">${r['姓名']||'—'}</div></div>
-          <div class="info-item"><div class="info-label">健檢日期</div><div class="info-value">${r['健檢日期']||'—'}</div></div>
+          <div class="info-item"><div class="info-label">健檢日期</div><div class="info-value">${r['健檢日期'] ? String(r['健檢日期']).slice(0,10) : '—'}</div></div>
           <div class="info-item span2"><div class="info-label">健檢方案</div><div class="info-value">${planBadge}</div></div>
           <div class="info-item"><div class="info-label">自費升等費用</div><div class="info-value">${upgradeDisplay}</div></div>
           <div class="info-item"><div class="info-label">加選項目</div><div class="info-value">${addon||'—'}</div></div>

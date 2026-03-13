@@ -197,7 +197,7 @@ textarea{resize:vertical;min-height:72px;}
 
       <!-- 眷屬新增按鈕 -->
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-        <div style="font-size:13px;color:var(--slate-m);">員工本人及自費親友必須一起預約，分頁填寫</div>
+        <div style="font-size:13px;color:var(--slate-m);">📢員工本人與自費親友請合併預約，填妥本人資料後點「＋ 新增親友」新增</div>
         <button class="btn-add-family" onclick="addFamily()">＋ 新增親友</button>
       </div>
 
@@ -363,7 +363,7 @@ function personFormHTML(p, i){
     <div class="form-grid">
       <div class="form-section">基本資料</div>
       <div class="fg span2">
-          <label>健檢日期 <span class="req">*</span><span class="hint"><span style="color:#d94f4f;font-weight:bold;font-size:18px;">📅須與線上預約日期一致！若不一致，將被重新分配到未額滿的日期📅</span></span></label>
+          <label>健檢日期 <span class="req">*</span><span class="hint"><span style="color:#d94f4f;font-weight:bold;font-size:18px;">📅健檢日期須與線上預約日期一致📅</span></span></label>
         <input type="date" id="p${i}_date" value="${p.fd.date||''}">
       </div>
       <div class="fg"><label>姓名 <span class="req">*</span></label><input type="text" id="p${i}_name" placeholder="請輸入真實中文姓名" value="${p.fd.name||''}"></div>
@@ -415,8 +415,8 @@ function personFormHTML(p, i){
       </div>
 
       <div class="form-section">自費項目與備註</div>
-      <div class="fg span2"><label>自費升等費用<span class="hint">（超過補助額度，填差額金額；不符合補助條件之員工及親友，填全額）</span></label><input type="number" id="p${i}_upgrade" placeholder="例：正式員工補助3400元，自費升等選6000元方案者，則填自費升等差額【2600】" min="0" value="${p.fd.upgrade||''}"></div>
-      <div class="fg span2"><label>自費加選項目及費用<span class="hint">（填項目+金額 多筆用,分隔）</span></label><input type="text" id="p${i}_addon" placeholder="例：胰臟癌(CA-199)+400,胃鏡+1575" value="${p.fd.addon||''}"></div>
+      <div class="fg span2"><label>自費方案或自費升等費用<span class="hint">（超過補助額度填差額；不符合補助之員工及親友填全額）</span></label><input type="number" id="p${i}_upgrade" placeholder="例：員工補助3400元，自費升等選6000元方案，填入自費升等差額【2600】" min="0" value="${p.fd.upgrade||''}"></div>
+      <div class="fg span2"><label>自費加選項目及費用<span class="hint">（填項目+金額/多筆用,分隔）</span></label><input type="text" id="p${i}_addon" placeholder="例：抽血+400,胃鏡+1575" value="${p.fd.addon||''}"></div>
       <div class="fg span2"><label>備註<span class="hint">（親友預約單請備註員工姓名）</span></label>
         <textarea id="p${i}_note" placeholder="親友預約單請備註員工姓名">${p.fd.note||''}</textarea>
       </div>

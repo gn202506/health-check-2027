@@ -36,7 +36,7 @@ main{max-width:720px;margin:0 auto;padding:36px 20px 80px;}
 .btn-search{padding:12px 24px;border-radius:8px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'Noto Sans TC',sans-serif;background:var(--teal);color:white;transition:all .2s;white-space:nowrap;}
 .btn-search:hover{background:var(--teal-d);}
 .btn-search:disabled{background:var(--border);color:var(--slate-m);cursor:not-allowed;}
-.hint-text{font-size:11px;color:var(--slate-m);margin-bottom:20px;}
+.hint-text{font-size:11px;color:var(--slate-m);margin-bottom:8px;}
 .result-area{display:none;}
 .result-area.visible{display:block;animation:fadeUp .3s ease;}
 .result-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
@@ -110,7 +110,7 @@ main{max-width:720px;margin:0 auto;padding:36px 20px 80px;}
         <button class="btn-search" id="searchBtn" onclick="doSearch()">查詢</button>
       </div>
       <div class="hint-text">※ 報名序號於報名完成頁面顯示，格式為 HC 開頭共10碼</div>
-
+      <div style="font-weight: bold; font-size: 18px; color: #ab1a1a; margin-top: 0px; margin-bottom: 20px;">📢健檢日期或項目若已隨醫院排定變動，請以醫院安排為主。</div>
       <div class="error-box" id="errorBox"></div>
 
       <div class="result-area" id="resultArea">
@@ -177,7 +177,7 @@ function renderResult(bid, rows){
       ? '<span class="plan-badge plan-b">B 方案 NT$ 6,000</span>'
       : '—';
 
-    const upgrade = r['自費升等費用'];
+    const upgrade = r['自費方案或自費升等費用'];
     const upgradeDisplay = (upgrade && Number(upgrade) > 0)
       ? 'NT$ ' + Number(upgrade).toLocaleString()
       : '—';
@@ -197,7 +197,7 @@ function renderResult(bid, rows){
           <div class="info-item"><div class="info-label">姓名</div><div class="info-value">${r['姓名']||'—'}</div></div>
           <div class="info-item"><div class="info-label">健檢日期</div><div class="info-value">${r['健檢日期'] ? String(r['健檢日期']).slice(0,10) : '—'}</div></div>
           <div class="info-item span2"><div class="info-label">健檢方案</div><div class="info-value">${planBadge}</div></div>
-          <div class="info-item"><div class="info-label">自費升等費用</div><div class="info-value">${upgradeDisplay}</div></div>
+          <div class="info-item"><div class="info-label">自費方案或自費升等費用</div><div class="info-value">${upgradeDisplay}</div></div>
           <div class="info-item"><div class="info-label">加選項目</div><div class="info-value">${addon||'—'}</div></div>
           ${isEmp ? `
           <div class="info-item"><div class="info-label">公司別</div><div class="info-value">${r['公司別']||'—'}</div></div>
